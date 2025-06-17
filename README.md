@@ -1,2 +1,4 @@
-# goldendict-dictionary
-Customize of goldendict and Create dictionary entry input tool
+# goldendict-dictionary-entry-editor-tool
+
+Electron.js
+onCodeMerge.js (WYSIWYG)
