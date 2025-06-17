@@ -1,7 +1,0 @@
-{
-  "name": "goldendict-dictionary-editor",
-  "packageManager": "yarn@4.6.0",
-  "devDependencies": {
-    "electron": "^36.4.0"
-  }
-}
