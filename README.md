@@ -1,4 +1,5 @@
 # goldendict-dictionary-entry-editor-tool
 
 Electron.js
-onCodeMerge.js (WYSIWYG)
+
+on-codemerge.js (WYSIWYG)
