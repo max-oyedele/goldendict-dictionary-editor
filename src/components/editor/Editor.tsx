@@ -86,5 +86,5 @@ export const EditorComponent = ({ value, onValueChange }: { value: string; onVal
     }
   }, [editor, value]);
 
-  return <div ref={editorRef} className="editor-content"></div>;
+  return <div ref={editorRef}></div>;
 };

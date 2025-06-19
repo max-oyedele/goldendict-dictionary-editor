@@ -45,7 +45,7 @@ function TopBar() {
       }
     };
 
-    electron.on('window-state', handleWindowState);
+    electron?.on('window-state', handleWindowState);
   }, [electron]);
 
   return (

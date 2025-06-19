@@ -28,15 +28,5 @@ body {
   height: 100%;
   min-height: 100%;
   overflow: auto;
-}
-
-.editor-sidebar {
-  width: 150px;
-  border-right: 1px solid #ddd;
-  padding: 0.5rem;
-}
-
-.editor-content {
-  flex: 1;
-  padding: 1rem;
+  padding: 0.2rem;
 }
