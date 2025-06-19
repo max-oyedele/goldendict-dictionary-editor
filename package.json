@@ -21,6 +21,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "on-codemerge": "^1.0.28",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
