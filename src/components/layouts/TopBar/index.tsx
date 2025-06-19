@@ -36,7 +36,7 @@ function TopBar() {
   return (
     <div className={styles.TopBar}>
       <div className={styles.TopBarArea} onDoubleClick={onMaximizeRestoreApp}>
-        <span className={styles.TopBarArea}>electron-template</span>
+        <span className={styles.TopBarArea}>dictionary-term</span>
       </div>
 
       <div className={styles.TopBarControls}>

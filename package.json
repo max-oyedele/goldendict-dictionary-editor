@@ -1,6 +1,6 @@
 {
-  "name": "electron-template",
-  "description": "electron-template",
+  "name": "dictionary-term",
+  "description": "goldendict dictionary term editor by electron.js",
   "version": "1.0.0",
   "type": "module",
   "main": "dist/main.js",
