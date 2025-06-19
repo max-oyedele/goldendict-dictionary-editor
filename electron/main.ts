@@ -35,7 +35,7 @@ function createWindow() {
     mainWindow.loadURL(`http://localhost:${process.env.VITE_PORT || 8888}`);
     mainWindow.webContents.openDevTools();
   }
-
+  
   ipcMain.on('minimize-app', () => {
     if (mainWindow) {
       mainWindow.minimize();

@@ -2,7 +2,7 @@ import { type TypeRouter } from './router.types';
 
 import paths from './paths';
 
-import { Home, NotFound } from '@pages';
+import { Home, NotFound, Editor } from '@pages';
 
 const routes: TypeRouter[] = [
   {
@@ -10,11 +10,15 @@ const routes: TypeRouter[] = [
     element: <Home />,
     title: 'Home',
   },
-
   {
     path: '*',
     element: <NotFound />,
     title: 'NotFound',
+  },
+  {
+    path: paths.Editor,
+    element: <Editor />,
+    title: 'Editor',
   },
 ];
 

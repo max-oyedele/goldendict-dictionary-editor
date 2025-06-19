@@ -1,5 +1,13 @@
+import { useNavigate } from 'react-router-dom';
+
 function Home() {
-  return <div>Home</div>;
+  const navigate = useNavigate();
+
+  return (
+    <div>
+      <button onClick={() => navigate('/editor')}>Home</button>
+    </div>
+  );
 }
 
 export default Home;

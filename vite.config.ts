@@ -54,6 +54,12 @@ export default defineConfig({
     postcss: './postcss.config.js',
   },
 
+  resolve: {
+    alias: {
+      'on-codemerge': '/node_modules/on-codemerge'
+    }
+  },
+
   build: {
     outDir: 'dist',
     emptyOutDir: true,
