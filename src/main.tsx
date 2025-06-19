@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import '@styles/normalize.css';
 import '@styles/vars.css';
 import '@styles/index.scss';
-import '@styles/on-codemerge.css';
 
 import App from './App';
 import { store } from '@store';

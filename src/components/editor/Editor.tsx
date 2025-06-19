@@ -70,7 +70,7 @@ export const EditorComponent = ({ value, onValueChange }: { value: string; onVal
       newEditor.use(new MathPlugin());
       newEditor.use(new ToolbarDividerPlugin());
       newEditor.use(new ResponsivePlugin());
-        newEditor.use(new ShortcutsPlugin());
+      newEditor.use(new ShortcutsPlugin());
       //   newEditor.use(new TemplatesPlugin());
 
       newEditor.subscribeToContentChange((newContent) => {
@@ -86,5 +86,5 @@ export const EditorComponent = ({ value, onValueChange }: { value: string; onVal
     }
   }, [editor, value]);
 
-  return <div ref={editorRef}></div>;
+  return <div ref={editorRef} className="editor-content"></div>;
 };

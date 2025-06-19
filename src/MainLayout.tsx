@@ -1,8 +1,23 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import { IpcRendererEvent } from 'electron';
 import classNames from 'classnames';
 
-import styles from './TopBar.module.scss';
+import styles from '@styles/TopBar.module.scss';
+
+function MainLayout() {
+  return (
+    <div className="wrapper">
+      <TopBar />
+
+      <main className="flex-auto overflow-auto">
+        <Outlet />
+      </main>
+    </div>
+  );
+}
+
+export default MainLayout;
 
 function TopBar() {
   const electron = window.electron;
@@ -67,5 +82,3 @@ function TopBar() {
     </div>
   );
 }
-
-export default TopBar;

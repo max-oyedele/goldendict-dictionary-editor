@@ -3,11 +3,7 @@ import { useNavigate } from 'react-router-dom';
 function Home() {
   const navigate = useNavigate();
 
-  return (
-    <div>
-      <button onClick={() => navigate('/editor')}>Home</button>
-    </div>
-  );
+  return <div>Home</div>;
 }
 
 export default Home;
