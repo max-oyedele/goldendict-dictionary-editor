@@ -9,6 +9,7 @@ import {
   CommentsPlugin,
   ExportPlugin,
   FileUploadPlugin,
+  FontPlugin,
   FooterPlugin,
   FootnotesPlugin,
   HistoryPlugin,
@@ -16,6 +17,7 @@ import {
   ImagePlugin,
   LinkPlugin,
   ListsPlugin,
+  MathPlugin,
   ResponsivePlugin,
   ShortcutsPlugin,
   TablePlugin,
@@ -37,30 +39,39 @@ export const EditorComponent = ({ value, onValueChange }: { value: string; onVal
 
       newEditor.setLocale('en');
 
-      newEditor.use(new BlockPlugin());
-      newEditor.use(new ChartsPlugin());
-      newEditor.use(new CodeBlockPlugin());
-      newEditor.use(new CollaborationPlugin());
+      newEditor.use(new ToolbarPlugin());
+
+      newEditor.use(new HistoryPlugin());
+      newEditor.use(new ToolbarDividerPlugin());
+
+      newEditor.use(new FontPlugin());
+      newEditor.use(new AlignmentPlugin());
+      newEditor.use(new ToolbarDividerPlugin());
+
+      //   newEditor.use(new BlockPlugin());
+      //   newEditor.use(new CodeBlockPlugin());
+      //   newEditor.use(new CollaborationPlugin());
+      newEditor.use(new TypographyPlugin());
       newEditor.use(new ColorPlugin());
       newEditor.use(new CommentsPlugin());
-      newEditor.use(new ExportPlugin());
-      newEditor.use(new FileUploadPlugin());
-      newEditor.use(new FooterPlugin());
-      newEditor.use(new FootnotesPlugin());
-      newEditor.use(new HistoryPlugin());
-      newEditor.use(new HTMLViewerPlugin());
-      newEditor.use(new ImagePlugin());
-      newEditor.use(new LinkPlugin());
-      newEditor.use(new ListsPlugin());
-      newEditor.use(new ResponsivePlugin());
-      newEditor.use(new ShortcutsPlugin());
-      newEditor.use(new TablePlugin());
-      newEditor.use(new TemplatesPlugin());
       newEditor.use(new ToolbarDividerPlugin());
-      newEditor.use(new ToolbarPlugin());
-      newEditor.use(new TypographyPlugin());
+
+      //   newEditor.use(new ExportPlugin());
+      //   newEditor.use(new FileUploadPlugin());
+      //   newEditor.use(new FooterPlugin());
+      //   newEditor.use(new FootnotesPlugin());
+      //   newEditor.use(new HTMLViewerPlugin());
+      newEditor.use(new ListsPlugin());
+      newEditor.use(new TablePlugin());
+      newEditor.use(new ImagePlugin());
       newEditor.use(new VideoPlugin());
-      newEditor.use(new AlignmentPlugin());
+      newEditor.use(new LinkPlugin());
+      newEditor.use(new ChartsPlugin());
+      newEditor.use(new MathPlugin());
+      newEditor.use(new ToolbarDividerPlugin());
+      newEditor.use(new ResponsivePlugin());
+        newEditor.use(new ShortcutsPlugin());
+      //   newEditor.use(new TemplatesPlugin());
 
       newEditor.subscribeToContentChange((newContent) => {
         console.log('Content changed:', newContent);

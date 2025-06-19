@@ -56,8 +56,8 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      'on-codemerge': '/node_modules/on-codemerge'
-    }
+      'on-codemerge': '/node_modules/on-codemerge',
+    },
   },
 
   build: {
