@@ -3,14 +3,46 @@
     "target": "esnext",
     "module": "esnext",
     "jsx": "react-jsx",
-    "strict": true,
     "moduleResolution": "node",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@components": ["components"],
+
+      "@configs/*": ["configs/*"],
+      "@configs": ["configs"],
+
+      "@hooks/*": ["hooks/*"],
+      "@hooks": ["hooks"],
+
+      "@interfaces/*": ["interfaces/*"],
+      "@interfaces": ["interfaces"],
+
+      "@pages/*": ["pages/*"],
+      "@pages": ["pages"],
+
+      "@services/*": ["services/*"],
+      "@services": ["services"],
+
+      "@store/*": ["store/*"],
+      "@store": ["store"],
+
+      "@styles/*": ["styles/*"],
+      "@styles": ["styles"],
+
+      "@utils/*": ["utils/*"],
+      "@utils": ["utils"]
+    },
+    "outDir": "./dist",
     "rootDir": "./src",
-    "outDir": "./dist"
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "strict": false,
+    "jsxImportSource": "react",
+    "skipLibCheck": true
   },
-  "include": ["src"],
+  "include": ["src", "src/interfaces/declaration.d.ts"],
   "exclude": ["node_modules"]
 }

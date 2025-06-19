@@ -2,4 +2,6 @@
 
 Electron.js
 
+React, TypeScript, Vite
+
 on-codemerge.js (WYSIWYG)
