@@ -3,16 +3,18 @@ import { Outlet } from 'react-router-dom';
 import { IpcRendererEvent } from 'electron';
 import classNames from 'classnames';
 
-import styles from '@styles/TopBar.module.scss';
+import styles from '@styles/MainLayout.module.scss';
 
 function MainLayout() {
   return (
     <div className="wrapper">
       <TopBar />
 
-      <main className="flex-auto overflow-auto">
+      <main>
         <Outlet />
       </main>
+
+      <BottomBar />
     </div>
   );
 }
@@ -81,4 +83,8 @@ function TopBar() {
       </div>
     </div>
   );
+}
+
+function BottomBar() {
+  return <div className={styles.BottomBar}>@songsan</div>;
 }

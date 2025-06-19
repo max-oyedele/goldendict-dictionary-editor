@@ -2,6 +2,7 @@
 .resizable-layout {
   display: flex;
   // height: 100vh;
+  height: calc(100vh - 32px - 25px);
   position: relative;
 }
 

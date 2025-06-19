@@ -3,3 +3,10 @@ export type TypeRouter<T = string> = {
   path: T;
   element: React.ReactElement;
 };
+
+export type EntryItem = {
+  term: string;
+  article: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+};

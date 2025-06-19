@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import routes from 'routes';
 import MainLayout from './MainLayout';
-import { TypeRouter } from './types';
+import { TypeRouter } from '@types';
 
 function App() {
   return (

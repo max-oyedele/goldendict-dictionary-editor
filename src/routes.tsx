@@ -1,6 +1,5 @@
-import { type TypeRouter } from './types';
-
 import { Home, Editor } from '@pages';
+import { type TypeRouter } from '@types';
 
 const routes: TypeRouter[] = [
   {

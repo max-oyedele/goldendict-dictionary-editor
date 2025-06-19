@@ -3,39 +3,32 @@ import { SideBar } from '@components/editor/SideBar';
 import { EditorComponent } from '@components/editor/Editor';
 import '@styles/on-codemerge.css';
 import '@styles/ResizableSidebar.scss';
+import { EntryItem } from '@types';
+import { SideBarInitialWidth } from '@configs/editor';
 
 const Editor = () => {
-  const items = ['Item 1', 'Item 2', 'Item 3'];
+  const items: EntryItem[] = [];
   const [value, setValue] = useState<string>('');
 
   return (
-    <div className="editor-wrapper">
-      {/* <SideBar items={items} onSelect={(item) => alert(item)} /> */}
-      {/* <EditorComponent
-        value={value}
-        onValueChange={(newValue) => {
-          console.log('new value=', newValue);
-        }}
-      /> */}
-      <ResizableSidebarLayout
-        sidebarContent={<SideBar items={items} onSelect={(item) => alert(item)} />}
-        children={
-          <EditorComponent
-            value={value}
-            onValueChange={(newValue) => {
-              console.log('new value=', newValue);
-            }}
-          />
-        }
-      />
-    </div>
+    <ResizableSidebarLayout
+      sidebarContent={<SideBar items={items} onSelect={(item) => alert(item)} onCreate={() => {}} onUpdate={() => {}} onDelete={() => {}} />}
+      children={
+        <EditorComponent
+          value={value}
+          onValueChange={(newValue) => {
+            console.log('new value=', newValue);
+          }}
+        />
+      }
+    />
   );
 };
 
 export default Editor;
 
 const ResizableSidebarLayout = ({ children, sidebarContent }) => {
-  const [sidebarWidth, setSidebarWidth] = useState(150); // initial width in px
+  const [sidebarWidth, setSidebarWidth] = useState(SideBarInitialWidth); // initial width in px
   const isResizing = useRef(false);
 
   const handleMouseDown = () => {
@@ -45,7 +38,7 @@ const ResizableSidebarLayout = ({ children, sidebarContent }) => {
 
   const handleMouseMove = (e) => {
     if (!isResizing.current) return;
-    setSidebarWidth(Math.max(150, e.clientX)); // minimum width 150px
+    setSidebarWidth(Math.max(SideBarInitialWidth, e.clientX)); // minimum width
   };
 
   const handleMouseUp = () => {
