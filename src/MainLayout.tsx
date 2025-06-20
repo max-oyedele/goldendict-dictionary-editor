@@ -86,5 +86,5 @@ function TopBar() {
 }
 
 function BottomBar() {
-  return <div className={styles.BottomBar}>@songsan</div>;
+  return <div className={styles.BottomBar}>@songsan &nbsp;&nbsp; v1.0</div>;
 }

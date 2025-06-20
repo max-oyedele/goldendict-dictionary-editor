@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import '@styles/Sidebar.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faEdit, faTrash, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 
-export const SideBar = ({ items, onSelect, onCreate, onUpdate, onDelete, selectedItem }) => {
+export const SideBar = ({ items, onSelect, onCreate, onUpdate, onDelete, selectedItem, onLoad }) => {
   const [search, setSearch] = useState('');
   const [showCreateDialog, setShowCreateDialog] = useState(false);
   const [newItem, setNewItem] = useState({ term: '', article: '' });
@@ -52,29 +52,42 @@ export const SideBar = ({ items, onSelect, onCreate, onUpdate, onDelete, selecte
     setShowUpdateDialog(false);
   };
 
+  const handleLoad = () => {
+    if (onLoad) {
+      onLoad();
+    }
+  };
+
   return (
     <div>
       <div className="sidebar-actions">
-        <button type="button" onClick={handleCreate} title="Create">
-          <FontAwesomeIcon icon={faPlus} />
-        </button>
-        <button type="button" onClick={handleUpdate} disabled={!selectedItem} title="Update">
-          <FontAwesomeIcon icon={faEdit} />
-        </button>
-        <button
-          type="button"
-          onClick={() => {
-            if (selectedItem && onDelete) {
-              if (window.confirm(`Are you sure you want to delete "${selectedItem.term}"?`)) {
-                onDelete(selectedItem);
+        <div>
+          <button type="button" onClick={handleLoad} title="Load">
+            <FontAwesomeIcon icon={faFolderOpen} />
+          </button>
+        </div>
+        <div>
+          <button type="button" onClick={handleCreate} title="Create">
+            <FontAwesomeIcon icon={faPlus} />
+          </button>
+          <button type="button" onClick={handleUpdate} disabled={!selectedItem} title="Update">
+            <FontAwesomeIcon icon={faEdit} />
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              if (selectedItem && onDelete) {
+                if (window.confirm(`Are you sure you want to delete "${selectedItem.term}"?`)) {
+                  onDelete(selectedItem);
+                }
               }
-            }
-          }}
-          disabled={!selectedItem}
-          title="Delete"
-        >
-          <FontAwesomeIcon icon={faTrash} />
-        </button>
+            }}
+            disabled={!selectedItem}
+            title="Delete"
+          >
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+        </div>
       </div>
       <div className="sidebar-search-box">
         <input className="sidebar-search" type="text" placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} />

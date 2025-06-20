@@ -30,9 +30,18 @@ const Editor = () => {
     setSelectedItem(updatedItem);
   };
 
+  const handleLoad = async () => {
+    const content = await window.electron.openReadFileDialog();
+    if (content) {
+      setItems(JSON.parse(content));
+    }
+  };
+
   return (
     <ResizableSidebarLayout
-      sidebarContent={<SideBar items={items} onSelect={handleSelect} onCreate={handleCreate} onUpdate={handleUpdate} onDelete={handleDelete} selectedItem={selectedItem} />}
+      sidebarContent={
+        <SideBar items={items} onSelect={handleSelect} onCreate={handleCreate} onUpdate={handleUpdate} onDelete={handleDelete} selectedItem={selectedItem} onLoad={handleLoad} />
+      }
       children={<EditorComponent items={items} setItems={setItems} selectedItem={selectedItem} />}
     />
   );

@@ -17,6 +17,7 @@
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "electron-log": "^5.4.1",
     "on-codemerge": "^1.0.28",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"

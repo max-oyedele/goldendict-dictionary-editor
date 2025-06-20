@@ -9,40 +9,40 @@ dotenv.config();
 export default defineConfig({
   plugins: [
     react(),
-    // electron([
-    //   {
-    //     entry: 'electron/main.ts',
-    //     vite: {
-    //       build: {
-    //         outDir: 'dist/',
-    //         rollupOptions: {
-    //           output: {
-    //             format: 'es',
-    //           },
-    //         },
-    //       },
-    //     },
-    //   },
+    electron([
+      {
+        entry: 'electron/main.ts',
+        vite: {
+          build: {
+            outDir: 'dist/',
+            rollupOptions: {
+              output: {
+                format: 'es',
+              },
+            },
+          },
+        },
+      },
 
-    //   {
-    //     entry: 'electron/preload.ts',
-    //     vite: {
-    //       build: {
-    //         outDir: 'dist/',
-    //         rollupOptions: {
-    //           output: {
-    //             format: 'cjs',
-    //           },
-    //         },
-    //         lib: {
-    //           entry: 'electron/preload.ts',
-    //           formats: ['cjs'],
-    //           fileName: () => 'preload.js',
-    //         },
-    //       },
-    //     },
-    //   },
-    // ]),
+      {
+        entry: 'electron/preload.ts',
+        vite: {
+          build: {
+            outDir: 'dist/',
+            rollupOptions: {
+              output: {
+                format: 'cjs',
+              },
+            },
+            lib: {
+              entry: 'electron/preload.ts',
+              formats: ['cjs'],
+              fileName: () => 'preload.js',
+            },
+          },
+        },
+      },
+    ]),
     tsConfigPaths(),
   ],
 

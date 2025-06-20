@@ -1,12 +1,12 @@
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
 
 contextBridge.exposeInMainWorld('electron', {
-  // Отправка сообщений в main процесс
+  // Sending messages to the main process
   send: (channel: string, ...args: any[]) => {
     ipcRenderer.send(channel, ...args);
   },
 
-  // Получение ответа от main процесса (одноразовое)
+  // Receiving a response from the main process (one-time)
   invoke: async (channel: string, ...args: any[]): Promise<any> => {
     try {
       return await ipcRenderer.invoke(channel, ...args);
@@ -17,25 +17,29 @@ contextBridge.exposeInMainWorld('electron', {
     }
   },
 
-  // Подписка на сообщения от main процесса
+  // Subscribing to messages from the main process
   on: (channel: string, listener: (event: IpcRendererEvent, ...args: any[]) => void) => {
     ipcRenderer.on(channel, listener);
 
     return () => ipcRenderer.removeListener(channel, listener); // Функция для отписки
   },
 
-  // Подписка на сообщения с гарантией единого вызова
+  // Subscribe to messages with the Single Call Guarantee
   once: (channel: string, listener: (event: IpcRendererEvent, ...args: any[]) => void) => {
     ipcRenderer.once(channel, listener);
   },
 
-  // Удаление всех слушателей для канала
+  // Remove all listeners for a channel
   removeAllListeners: (channel: string) => {
     ipcRenderer.removeAllListeners(channel);
   },
 
-  // Список активных каналов (для отладки)
+  // List of active channels (for debugging)
   getChannels: () => {
     return ipcRenderer.eventNames();
   },
+
+  writeFile: (filename, content) => ipcRenderer.send('write-file', { filename, content }),
+
+  openReadFileDialog: () => ipcRenderer.invoke('open-read-file'),
 });

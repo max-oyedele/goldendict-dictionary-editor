@@ -1,4 +1,3 @@
-import fs from 'fs';
 import { useRef, useState, useEffect } from 'react';
 import {
   HTMLEditor,
@@ -112,8 +111,8 @@ export const EditorComponent = ({
     }, '');
     console.log('dict string=\n', dictString);
 
-    fs.writeFileSync('dict.txt', dictString);
-    fs.writeFileSync('items.json', JSON.stringify(items, null, 2));
+    window.electron.writeFile('dict.txt', dictString);
+    window.electron.writeFile('items.json', JSON.stringify(items, null, 2));
   };
 
   return (
