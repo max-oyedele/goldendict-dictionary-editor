@@ -7,20 +7,33 @@ import { EntryItem } from '@types';
 import { SideBarInitialWidth } from '@configs/editor';
 
 const Editor = () => {
-  const items: EntryItem[] = [];
-  const [value, setValue] = useState<string>('');
+  const [items, setItems] = useState<EntryItem[]>([]);
+
+  const [selectedItem, setSelectedItem] = useState<EntryItem | null>(null);
+
+  const handleCreate = (newItem: EntryItem) => {
+    setItems((prev) => [...prev, newItem]);
+    setSelectedItem(newItem);
+  };
+
+  const handleSelect = (item: EntryItem) => {
+    setSelectedItem(item);
+  };
+
+  const handleDelete = (itemToDelete: EntryItem) => {
+    setItems((prev) => prev.filter((item) => item !== itemToDelete));
+    setSelectedItem(null);
+  };
+
+  const handleUpdate = (updatedItem: EntryItem) => {
+    setItems((prev) => prev.map((item) => (item.term === selectedItem.term ? { ...item, ...updatedItem } : item)));
+    setSelectedItem(updatedItem);
+  };
 
   return (
     <ResizableSidebarLayout
-      sidebarContent={<SideBar items={items} onSelect={(item) => alert(item)} onCreate={() => {}} onUpdate={() => {}} onDelete={() => {}} />}
-      children={
-        <EditorComponent
-          value={value}
-          onValueChange={(newValue) => {
-            console.log('new value=', newValue);
-          }}
-        />
-      }
+      sidebarContent={<SideBar items={items} onSelect={handleSelect} onCreate={handleCreate} onUpdate={handleUpdate} onDelete={handleDelete} selectedItem={selectedItem} />}
+      children={<EditorComponent items={items} setItems={setItems} selectedItem={selectedItem} />}
     />
   );
 };

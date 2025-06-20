@@ -3,28 +3,76 @@ import '@styles/Sidebar.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-export const SideBar = ({ items, onSelect, onCreate, onUpdate, onDelete }) => {
+export const SideBar = ({ items, onSelect, onCreate, onUpdate, onDelete, selectedItem }) => {
   const [search, setSearch] = useState('');
-  const [selectedIdx, setSelectedIdx] = useState(null);
-  const filteredItems = items.filter((item) => item.term.toLowerCase().includes(search.toLowerCase()));
+  const [showCreateDialog, setShowCreateDialog] = useState(false);
+  const [newItem, setNewItem] = useState({ term: '', article: '' });
+  const [showUpdateDialog, setShowUpdateDialog] = useState(false);
+  const [updateItem, setUpdateItem] = useState({ term: '', article: '' });
 
-  const handleSelect = (item, idx) => {
-    setSelectedIdx(idx);
+  const filteredItems = items.filter((item) => item.term.toLowerCase().includes(search.toLowerCase())).sort((a, b) => a.term.localeCompare(b.term));
+
+  const handleSelect = (item) => {
     onSelect(item);
   };
 
-  const selectedItem = filteredItems[selectedIdx] || null;
+  const handleCreate = () => {
+    setShowCreateDialog(true);
+    setNewItem({ term: '', article: '' });
+  };
+
+  const handleCreateSubmit = (e) => {
+    e.preventDefault();
+    if (newItem.term.trim()) {
+      onCreate(newItem);
+      setShowCreateDialog(false);
+    }
+  };
+
+  const handleCreateCancel = () => {
+    setShowCreateDialog(false);
+  };
+
+  const handleUpdate = () => {
+    if (selectedItem) {
+      setUpdateItem({ ...selectedItem });
+      setShowUpdateDialog(true);
+    }
+  };
+
+  const handleUpdateSubmit = (e) => {
+    e.preventDefault();
+    if (updateItem.term.trim()) {
+      onUpdate(updateItem);
+      setShowUpdateDialog(false);
+    }
+  };
+
+  const handleUpdateCancel = () => {
+    setShowUpdateDialog(false);
+  };
 
   return (
     <div>
       <div className="sidebar-actions">
-        <button type="button" onClick={onCreate} title="Create">
+        <button type="button" onClick={handleCreate} title="Create">
           <FontAwesomeIcon icon={faPlus} />
         </button>
-        <button type="button" onClick={() => onUpdate && selectedItem && onUpdate(selectedItem)} disabled={!selectedItem} title="Update">
+        <button type="button" onClick={handleUpdate} disabled={!selectedItem} title="Update">
           <FontAwesomeIcon icon={faEdit} />
         </button>
-        <button type="button" onClick={() => onDelete && selectedItem && onDelete(selectedItem)} disabled={!selectedItem} title="Delete">
+        <button
+          type="button"
+          onClick={() => {
+            if (selectedItem && onDelete) {
+              if (window.confirm(`Are you sure you want to delete "${selectedItem.term}"?`)) {
+                onDelete(selectedItem);
+              }
+            }
+          }}
+          disabled={!selectedItem}
+          title="Delete"
+        >
           <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>
@@ -34,12 +82,48 @@ export const SideBar = ({ items, onSelect, onCreate, onUpdate, onDelete }) => {
       <div className="list-box">
         <ul>
           {filteredItems.map((item, idx) => (
-            <li key={idx} onClick={() => handleSelect(item, idx)} className={selectedIdx === idx ? 'selected' : ''}>
+            <li key={idx} onClick={() => handleSelect(item)} className={selectedItem && selectedItem.term === item.term ? 'selected' : ''}>
               {item.term}
             </li>
           ))}
         </ul>
       </div>
+      {showCreateDialog && (
+        <div className="modal-overlay" onClick={handleCreateCancel}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <form onSubmit={handleCreateSubmit}>
+              <div>
+                <label>Term:</label>
+                <input type="text" value={newItem.term} onChange={(e) => setNewItem({ ...newItem, term: e.target.value })} required />
+              </div>
+              <div className="modal-actions">
+                <button type="button" onClick={handleCreateCancel}>
+                  Cancel
+                </button>
+                <button type="submit">Create</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+      {showUpdateDialog && (
+        <div className="modal-overlay" onClick={handleUpdateCancel}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <form onSubmit={handleUpdateSubmit}>
+              <div>
+                <label>Term:</label>
+                <input type="text" value={updateItem.term} onChange={(e) => setUpdateItem({ ...updateItem, term: e.target.value })} required />
+              </div>
+              <div className="modal-actions">
+                <button type="button" onClick={handleUpdateCancel}>
+                  Cancel
+                </button>
+                <button type="submit">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

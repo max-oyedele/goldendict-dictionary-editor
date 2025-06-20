@@ -1,0 +1,28 @@
+.editor-button-box {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1rem;
+}
+
+.editor-button-box button {
+  border: 1px solid #007bff;
+  background: #fff;
+  color: #007bff;
+  padding: 0.4rem 1.2rem;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+}
+
+.editor-button-box button:hover,
+.editor-button-box button:focus {
+  background: #007bff;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
+  outline: none;
+}

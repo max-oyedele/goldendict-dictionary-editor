@@ -1,3 +1,4 @@
+import fs from 'fs';
 import { useRef, useState, useEffect } from 'react';
 import {
   HTMLEditor,
@@ -28,10 +29,20 @@ import {
   VideoPlugin,
   AlignmentPlugin,
 } from 'on-codemerge';
+import { EntryItem } from '@types';
+import '@styles/Editor.scss';
 
-export const EditorComponent = ({ value, onValueChange }: { value: string; onValueChange: React.Dispatch<React.SetStateAction<string>> }) => {
+export const EditorComponent = ({
+  items,
+  setItems,
+  selectedItem,
+}: {
+  items: EntryItem[];
+  setItems: React.Dispatch<React.SetStateAction<EntryItem[]>>;
+  selectedItem: EntryItem;
+}) => {
   const editorRef = useRef(null);
-  const [editor, setEditor] = useState(null);
+  const [editor, setEditor] = useState<HTMLEditor>(null);
 
   useEffect(() => {
     if (editorRef.current && !editor) {
@@ -74,17 +85,44 @@ export const EditorComponent = ({ value, onValueChange }: { value: string; onVal
       //   newEditor.use(new TemplatesPlugin());
 
       newEditor.subscribeToContentChange((newContent) => {
-        console.log('Content changed:', newContent);
-        onValueChange(newContent);
+        console.log(newContent);
       });
 
       setEditor(newEditor);
     }
+  }, [editor]);
 
-    if (editor && value) {
-      editor.setHtml(value);
+  useEffect(() => {
+    if (editor) {
+      editor.setHtml(selectedItem?.article || '');
     }
-  }, [editor, value]);
+  }, [editor, selectedItem?.term]);
 
-  return <div ref={editorRef}></div>;
+  const handleSaveAsTerm = () => {
+    setItems((prev) => prev.map((item) => (item.term === selectedItem.term ? { ...item, article: editor.getHtml() } : item)));
+  };
+
+  const handleExportToFile = () => {
+    const dictString = items.reduce((acc, item) => {
+      // apple<TAB><div><p>Apple</p></div>
+      //
+      // banana<TAB><div><p>Banana</p></div>
+      acc += `${item.term}\t${item.article.replace(/\s*\n\s*/g, '')}\n\n`;
+      return acc;
+    }, '');
+    console.log('dict string=\n', dictString);
+
+    fs.writeFileSync('dict.txt', dictString);
+    fs.writeFileSync('items.json', JSON.stringify(items, null, 2));
+  };
+
+  return (
+    <div id="eidtor">
+      <div id="main-editor" ref={editorRef}></div>
+      <div className="editor-button-box">
+        <button onClick={handleSaveAsTerm}>Save as Term</button>
+        <button onClick={handleExportToFile}>Export to File</button>
+      </div>
+    </div>
+  );
 };
