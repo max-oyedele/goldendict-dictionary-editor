@@ -1,10 +1,26 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
+import ReactDOM from 'react-dom/client';
+import { HashRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <h1>Hello Electron + React + Vite + TypeScript</h1>
-    <App />
-  </React.StrictMode>
-);
+import '@styles/normalize.css';
+import '@styles/vars.css';
+import '@styles/index.scss';
+
+import App from './App';
+import { store } from '@store';
+
+const rootElem = document.getElementById('root') as HTMLDivElement;
+
+if (rootElem) {
+  const root: ReactDOM.Root = ReactDOM.createRoot(rootElem);
+  root.render(
+    <Router>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </Router>
+  );
+}
+
+import '@styles/tailwind.css';
+import '@styles/fonts.css';

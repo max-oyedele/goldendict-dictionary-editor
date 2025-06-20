@@ -1,8 +1,19 @@
-import React, { useState, useEffect } from "react";
-import MyEditorComponent from "./MyEditor";
+import { Route, Routes } from 'react-router-dom';
 
-export default function App() {
-  const [value, setValue] = useState("");
+import routes from 'routes';
+import MainLayout from './MainLayout';
+import { TypeRouter } from '@types';
 
-  return <MyEditorComponent value={value} onValueChange={setValue} />;
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<MainLayout />}>
+        {routes.map(({ path, title, element }: TypeRouter) => {
+          return <Route key={title} path={path} element={element} />;
+        })}
+      </Route>
+    </Routes>
+  );
 }
+
+export default App;

@@ -1,0 +1,37 @@
+/* ResizableSidebar.css */
+.resizable-layout {
+  display: flex;
+  // height: 100vh;
+  height: calc(100vh - 32px - 25px);
+  position: relative;
+}
+
+.sidebar {
+  background: #f4f4f4;
+  border-right: 1px solid #ddd;
+  min-width: 150px;
+  // max-width: 500px;
+  height: 100%;
+  overflow: auto;
+}
+
+.resizer {
+  width: 5px;
+  cursor: col-resize;
+  background: #ccc;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  transition: background 0.2s;
+}
+.resizer:hover {
+  background: #999;
+}
+
+.main-content {
+  flex: 1;
+  height: 100%;
+  padding-left: 0.5rem;
+  overflow: auto;
+}
