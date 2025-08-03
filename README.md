@@ -1,4 +1,4 @@
-# goldendict-dictionary-entry-editor-tool
+# editor for goldendict-dictionary entries
 
 Electron.js
 
