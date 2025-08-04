@@ -79,8 +79,8 @@ export const EditorComponent = ({
       newEditor.use(new ChartsPlugin());
       newEditor.use(new MathPlugin());
       newEditor.use(new ToolbarDividerPlugin());
-      newEditor.use(new ResponsivePlugin());
-      newEditor.use(new ShortcutsPlugin());
+      // newEditor.use(new ResponsivePlugin());
+      // newEditor.use(new ShortcutsPlugin());
       //   newEditor.use(new TemplatesPlugin());
 
       newEditor.subscribeToContentChange((newContent) => {
