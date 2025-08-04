@@ -28,3 +28,7 @@
 @import 'on-codemerge/dist/src/plugins/ToolbarPlugin/style.css';
 @import 'on-codemerge/dist/src/plugins/TypographyPlugin/style.css';
 @import 'on-codemerge/dist/src/plugins/AlignmentPlugin/style.css';
+
+.html-editor img {
+    width: 150px
+}
