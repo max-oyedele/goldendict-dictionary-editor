@@ -30,5 +30,17 @@
 @import 'on-codemerge/dist/src/plugins/AlignmentPlugin/style.css';
 
 .html-editor img {
-    width: 150px
+  width: 150px;
+}
+
+button.toolbar-button[title='View History'] {
+  display: none !important;
+}
+
+button.toolbar-button[title='Font Settings'] {
+  display: none !important;
+}
+
+button.toolbar-button[title='Typography'] {
+  display: none !important;
 }

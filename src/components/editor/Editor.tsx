@@ -74,9 +74,9 @@ export const EditorComponent = ({
       newEditor.use(new ListsPlugin());
       newEditor.use(new TablePlugin());
       newEditor.use(new ImagePlugin());
-      newEditor.use(new VideoPlugin());
-      newEditor.use(new LinkPlugin());
-      newEditor.use(new ChartsPlugin());
+      // newEditor.use(new VideoPlugin());
+      // newEditor.use(new LinkPlugin());
+      // newEditor.use(new ChartsPlugin());
       newEditor.use(new MathPlugin());
       newEditor.use(new ToolbarDividerPlugin());
       // newEditor.use(new ResponsivePlugin());
